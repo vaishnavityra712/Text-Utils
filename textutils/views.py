@@ -45,9 +45,8 @@ def analyze(request):
     djtext = request.GET.get('text', 'default')
     removepunc = request.GET.get('removepunc', 'off')
     fullcaps=request.GET.get('fullcaps','off')
-    Above =request.GET.get('Above both','off')
-    print(djtext)
-    print(removepunc)
+    extraspaceremover = request.GET.get('extraspaceremover', 'off')
+    
     # return HttpResponse('''remove punc''')
     #  analyzed = djtext
 
@@ -60,17 +59,28 @@ def analyze(request):
         analyzed = ""
         for char in djtext:
             if char not in punctuations:
-                analyzed = analyzed + char.upper()
+                analyzed = analyzed + char
         params = {'purpose': 'Removed Punctuations', 'analyzed_text': analyzed}
         return render(request, 'analyze.html', params)
 
-    elif fullcaps=="on":
+    elif (fullcaps=="on"):
         analyzed= ""
         for char in djtext:
             analyzed = analyzed + char.upper() 
         params = {'purpose': 'Change To Uppercase', 'analyzed_text': analyzed}
         return render(request, 'analyze.html', params)   
- 
+    
+    elif (extraspaceremover=="on"):
+        analyzed = ""
+        for index, char in enumerate(djtext):
+            if djtext[index] == " " and djtext[index+1]==" ":
+                pass
+            else:
+                analyzed = analyzed + char
+        params = {'purpose': 'Removed extraspace', 'analyzed_text': analyzed}
+        # Analyze the text
+        return render(request, 'analyze.html', params)
+
     else:
         return HttpResponse("Error")
 
