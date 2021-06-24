@@ -86,7 +86,6 @@ def analyze(request):
         analyzed = analyzed + str(len(djtext.replace(" ","")))
         params = {'purpose': 'Total Number of characters in text', 'analyzed_text': analyzed}
         return render(request, 'analyze.html', params)   
-
     else:
         return HttpResponse("Error")
 
