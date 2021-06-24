@@ -45,7 +45,8 @@ def analyze(request):
     djtext = request.GET.get('text', 'default')
     removepunc = request.GET.get('removepunc', 'off')
     fullcaps=request.GET.get('fullcaps','off')
-    extraspaceremover = request.GET.get('extraspaceremover', 'off')
+    extraspaceremover=request.GET.get('extraspaceremover', 'off')
+    charcounter=request.GET.get('charcounter', 'off')
     
     # return HttpResponse('''remove punc''')
     #  analyzed = djtext
@@ -73,13 +74,18 @@ def analyze(request):
     elif (extraspaceremover=="on"):
         analyzed = ""
         for index, char in enumerate(djtext):
-            if djtext[index] == " " and djtext[index+1]==" ":
+            if djtext[index] == " " and djtext[index+1]== " ":
                 pass
             else:
                 analyzed = analyzed + char
         params = {'purpose': 'Removed extraspace', 'analyzed_text': analyzed}
-        # Analyze the text
         return render(request, 'analyze.html', params)
+
+    elif (charcounter=="on"):
+        analyzed= ""
+        analyzed = analyzed + str(len(djtext.replace(" ","")))
+        params = {'purpose': 'Total Number of characters in text', 'analyzed_text': analyzed}
+        return render(request, 'analyze.html', params)   
 
     else:
         return HttpResponse("Error")
