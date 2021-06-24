@@ -12,7 +12,7 @@
 <body>
     <!-- Hiiiiii {{name}} -->
     <h1>welcome to text analyzer.enter your text below</h1>
-    <form action='/analyze' method='GET'>
+    <form action='/analyze' method='POST'>{% csrf_token %}
         <textarea name='text' style='margin: 0px; width: 1175px; height: 78px;'></textarea><br>
         <input type="checkbox" name="removepunc">remove punctuations <br>
         <input type="checkbox" name="fullcaps">Upper Case <br>
