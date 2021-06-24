@@ -17,13 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     path('', views.index, name='index'), #the first argument the end point
-#     path('removepunc', views.removepunc, name='rempun'), #the first argument the end point
-#     path('capfirst', views.capfirst, name='capfirst'), #the first argument the end point
-#     path('about/', views.about, name='about')   
-# ]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'), #the first argument the end point
